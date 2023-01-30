@@ -13,10 +13,10 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "localhost:8080",
+  "host": "app-53674ee6-697b-4694-b3de-82b032a4f01f.cleverapps.io",
   "servers": [
     {
-      "url": "http://localhost:8080/"
+      "url": "http://app-53674ee6-697b-4694-b3de-82b032a4f01f.cleverapps.io/"
     }
   ],
   "basePath": "/",

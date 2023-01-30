@@ -1,0 +1,1087 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "LIBRARY API documentation",
+    "description": "Documentation of Library API",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "contact@library-api.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:8080",
+  "servers": [
+    {
+      "url": "http://localhost:8080/"
+    }
+  ],
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Endpoints"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "apiKey",
+      "name": "authorization",
+      "scheme": "bearer",
+      "bearerFormat": "JWT",
+      "in": "header"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/libraryapi/api/v1/members": {
+      "get": {
+        "tags": [
+          "Members"
+        ],
+        "summary": "Get all members",
+        "description": "This endpoint retrieves all the members in the database",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/libraryapi/api/v1/members/{id}": {
+      "get": {
+        "tags": [
+          "Members"
+        ],
+        "summary": "Get a member by ID",
+        "description": "This endpoint retrieves a member based on the provided ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/libraryapi/api/v1/addmember": {
+      "post": {
+        "tags": [
+          "Members"
+        ],
+        "summary": "Add a new member",
+        "description": "This endpoint adds a new member to the database",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Name": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "phoneNumber": {
+                  "example": "any"
+                },
+                "address": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/libraryapi/api/v1/updatemember/{memberId}": {
+      "put": {
+        "tags": [
+          "Members"
+        ],
+        "summary": "Update a member",
+        "description": "This endpoint updates a member in the database based on the provided ID",
+        "parameters": [
+          {
+            "name": "memberId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/libraryapi/api/v1/deletemember/{memberId}": {
+      "delete": {
+        "tags": [
+          "Members"
+        ],
+        "summary": "Deletes a member by ID",
+        "description": "Deletes a member from the database by providing the member ID",
+        "parameters": [
+          {
+            "name": "memberId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Service to register new member",
+        "description": "Service to register new member into libraryapi",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                },
+                "Name": {
+                  "example": "any"
+                },
+                "phoneNumber": {
+                  "example": "any"
+                },
+                "address": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/sign-in": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Service to sign-in",
+        "description": "Service to sign in into API and get jwt token for stateless authentication",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/me": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Service to get authenticated member",
+        "description": "Service to get authenticated member info",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/libraryapi/api/v1/services/getbooks": {
+      "get": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Get all books in the library",
+        "description": "This API endpoint retrieves all books in the library and returns a list of books in JSON format.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/libraryapi/api/v1/services/addbook": {
+      "post": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Add a new book to the library",
+        "description": "This API endpoint creates a new book in the library by sending a JSON payload in the request body.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Title": {
+                  "example": "any"
+                },
+                "Author": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/libraryapi/api/v1/services/updatebook/{bookId}": {
+      "put": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Update an existing book in the library",
+        "description": "This API endpoint updates an existing book in the library by sending a JSON payload in the request body.",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/libraryapi/api/v1/services/deletebook/{bookId}": {
+      "delete": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Delete a book from the library",
+        "description": "This API endpoint deletes a book from the library.",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/libraryapi/api/v1/services/getauthors": {
+      "get": {
+        "tags": [
+          "Authors"
+        ],
+        "summary": "Get authors",
+        "description": "Get all authors from the database",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/libraryapi/api/v1/services/addauthor": {
+      "post": {
+        "tags": [
+          "Authors"
+        ],
+        "summary": "Add author",
+        "description": "Add an author to the database",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/libraryapi/api/v1/services/updateauthor/{authorId}": {
+      "put": {
+        "tags": [
+          "Authors"
+        ],
+        "summary": "Update author",
+        "description": "Update an author in the database",
+        "parameters": [
+          {
+            "name": "authorId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/libraryapi/api/v1/services/deleteauthor/{authorId}": {
+      "delete": {
+        "tags": [
+          "Authors"
+        ],
+        "summary": "Delete author",
+        "description": "Delete an author from the database",
+        "parameters": [
+          {
+            "name": "authorId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/libraryapi/api/v1/services/getgenres": {
+      "get": {
+        "tags": [
+          "Genres"
+        ],
+        "summary": "Get all genres",
+        "description": "This endpoint is used to retrieve all genres from the database.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/libraryapi/api/v1/services/addgenre": {
+      "post": {
+        "tags": [
+          "Genres"
+        ],
+        "summary": "Add a new genre",
+        "description": "This endpoint is used to add a new genre to the database.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Name": {
+                  "example": "any"
+                },
+                "Description": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/libraryapi/api/v1/services/updategenre/{genreId}": {
+      "put": {
+        "tags": [
+          "Genres"
+        ],
+        "summary": "Update a genre",
+        "description": "This endpoint is used to update an existing genre in the database.",
+        "parameters": [
+          {
+            "name": "genreId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/libraryapi/api/v1/services/deletegenre/{genreId}": {
+      "delete": {
+        "tags": [
+          "Genres"
+        ],
+        "summary": "Delete a genre",
+        "description": "This endpoint is used to delete a genre from the database.",
+        "parameters": [
+          {
+            "name": "genreId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/libraryapi/api/v1/services/getloans": {
+      "get": {
+        "tags": [
+          "Loans"
+        ],
+        "summary": "Get all loan information",
+        "description": "Retrieve all loan information from the database",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/libraryapi/api/v1/services/addloan": {
+      "post": {
+        "tags": [
+          "Loans"
+        ],
+        "summary": "Add a new loan",
+        "description": "Add a new loan to the database",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "BookName": {
+                  "example": "any"
+                },
+                "DueDate": {
+                  "example": "any"
+                },
+                "LoanDate": {
+                  "example": "any"
+                },
+                "MemberName": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/libraryapi/api/v1/services/updateloan/{loanId}": {
+      "put": {
+        "tags": [
+          "Loans"
+        ],
+        "summary": "Update a loan",
+        "description": "Update an existing loan in the database",
+        "parameters": [
+          {
+            "name": "loanId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/libraryapi/api/v1/services/deleteloan/{loanId}": {
+      "delete": {
+        "tags": [
+          "Loans"
+        ],
+        "summary": "Delete a loan",
+        "description": "Delete an existing loan from the database",
+        "parameters": [
+          {
+            "name": "loanId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/libraryapi/api/v1/services/getreservations": {
+      "get": {
+        "tags": [
+          "Reservations"
+        ],
+        "summary": "Get all reservations",
+        "description": "Get all the reservations from the database",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/libraryapi/api/v1/services/addreservation": {
+      "post": {
+        "tags": [
+          "Reservations"
+        ],
+        "summary": "Add reservation",
+        "description": "Add a reservation to the database",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "BookTitle": {
+                  "example": "any"
+                },
+                "MemberName": {
+                  "example": "any"
+                },
+                "ReservationDate": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/libraryapi/api/v1/services/updatereservation/{reservationId}": {
+      "put": {
+        "tags": [
+          "Reservations"
+        ],
+        "summary": "Update reservation",
+        "description": "Update a reservation in the database",
+        "parameters": [
+          {
+            "name": "reservationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/libraryapi/api/v1/services/deletereservation/{reservationId}": {
+      "delete": {
+        "tags": [
+          "Reservations"
+        ],
+        "summary": "Delete reservation",
+        "description": "Delete a reservation from the database",
+        "parameters": [
+          {
+            "name": "reservationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Auth": {
+      "type": "object",
+      "properties": {
+        "register": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "example": "john.smith@yopmail.com"
+            },
+            "password": {
+              "type": "string",
+              "example": ""
+            },
+            "Name": {
+              "type": "string",
+              "example": "John Smith"
+            },
+            "phoneNumber": {
+              "type": "string",
+              "example": "+33695343070"
+            },
+            "address": {
+              "type": "string",
+              "example": "5 rue de la garenne, 29200 Brest"
+            }
+          },
+          "required": [
+            "email",
+            "password",
+            "Name"
+          ]
+        },
+        "sign-in": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "example": "john.smith@yopmail.com"
+            },
+            "password": {
+              "type": "string",
+              "example": ""
+            }
+          },
+          "required": [
+            "email",
+            "password"
+          ]
+        },
+        "me": {
+          "type": "object",
+          "properties": {
+            "JWT_SECRET": {
+              "type": "string",
+              "example": ""
+            }
+          },
+          "required": [
+            "JWT_SECRET"
+          ]
+        }
+      }
+    },
+    "Members": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "example": "John Smith"
+        },
+        "address": {
+          "type": "string",
+          "example": "5 rue de la garenne, 29200 Brest"
+        },
+        "email": {
+          "type": "string",
+          "example": "john.smith@yopmail.com"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "example": "+33695343070"
+        },
+        "uid": {
+          "type": "string",
+          "example": "4S6l8Pn9juB0aaxvKuxZ"
+        }
+      },
+      "required": [
+        "Name",
+        "address",
+        "email",
+        "phoneNumber",
+        "uid"
+      ]
+    },
+    "Books": {
+      "type": "object",
+      "properties": {
+        "Author": {
+          "type": "string",
+          "example": "J.K. Rowling"
+        },
+        "Title": {
+          "type": "string",
+          "example": "Harry Potter  and the Sorcerer's Stone"
+        }
+      },
+      "required": [
+        "Author",
+        "Title"
+      ]
+    },
+    "Authors": {
+      "type": "object",
+      "properties": {
+        "Date of birth": {
+          "type": "string",
+          "example": "31/07/1965"
+        },
+        "Date of death": {
+          "type": "string",
+          "example": "01/01/2000"
+        },
+        "Name": {
+          "type": "string",
+          "example": "J.K. Rowling"
+        }
+      },
+      "required": [
+        "Name"
+      ]
+    },
+    "Genres": {
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string",
+          "example": "Literary genre that focuses on fantasy stories, often with elements of magic and the fantastic."
+        },
+        "Name": {
+          "type": "string",
+          "example": "Fantasy"
+        }
+      },
+      "required": [
+        "Description",
+        "Name"
+      ]
+    },
+    "Loans": {
+      "type": "object",
+      "properties": {
+        "Book name": {
+          "type": "string",
+          "example": "Harry Potter and the Sorcerer's Stone"
+        },
+        "Due date": {
+          "type": "string",
+          "example": "14/01/2022"
+        },
+        "Loan date": {
+          "type": "string",
+          "example": "01/01/2022"
+        },
+        "Member name": {
+          "type": "string",
+          "example": "John Smith"
+        }
+      }
+    },
+    "Reservations": {
+      "type": "object",
+      "properties": {
+        "Book title": {
+          "type": "string",
+          "example": "Harry Potter and the Sorcerer's Stone"
+        },
+        "Member name": {
+          "type": "string",
+          "example": "John Smith"
+        },
+        "Reservation date": {
+          "type": "string",
+          "example": "01/01/2022"
+        }
+      }
+    }
+  }
+}

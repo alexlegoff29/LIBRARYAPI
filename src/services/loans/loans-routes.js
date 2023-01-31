@@ -7,6 +7,9 @@ module.exports = app => {
         // #swagger.tags = ['Loans']
         // #swagger.summary = "Get all loan information"
         // #swagger.description = "Retrieve all loan information from the database"
+        /* #swagger.security = [{
+                "bearerAuth": []
+        }] */
         firebaseService.getLoans()
             .then((loans) => {
                 res.status(200).json(loans);
@@ -81,6 +84,6 @@ module.exports = app => {
     });
 
     // -- To declare the prefix path of your API service
-    app.use("/libraryapi/api/v1/services", router);
+    app.use("/libraryapi/api/v1/loans", router);
 
 }

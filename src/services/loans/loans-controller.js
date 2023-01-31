@@ -1,10 +1,14 @@
 const firestore = require('../../config/firebase-config');
+const booksController = require('./books-controller');
 
 exports.getLoans = async () => {
+    let books = await booksController.getbooks();
     let loansSnapshot = await firestore.collection("loans").get();
     let loans = loansSnapshot.docs.map(loan => {
+        let loanData = loan.data();
+        let book = books.find(book => book.Id === loanData['Book id']);
         return {
-            BookName: loan.data()['Book name'],
+            BookName: book ? book.Name : 'Unknown',
             DueDate: loan.data()['Due date'],
             LoanDate: loan.data()['Loan date'],
             MemberName: loan.data()['Member name']

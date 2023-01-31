@@ -7,6 +7,9 @@ module.exports = app => {
         // #swagger.tags = ['Reservations']
         // #swagger.description = 'Get all the reservations from the database'
         // #swagger.summary = 'Get all reservations'
+        /* #swagger.security = [{
+                "bearerAuth": []
+        }] */
         firebaseService.getReservations()
             .then((reservations) => {
                 res.status(200).json(reservations);
@@ -80,6 +83,6 @@ module.exports = app => {
     });
 
     // -- To declare the prefix path of your API service
-    app.use("/libraryapi/api/v1/services", router);
+    app.use("/libraryapi/api/v1/reservations", router);
 
 }

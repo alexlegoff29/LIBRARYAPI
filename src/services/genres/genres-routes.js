@@ -79,6 +79,6 @@ module.exports = app => {
     });
 
     // -- To declare the prefix path of your API service
-    app.use("/libraryapi/api/v1/services", router);
+    app.use("/libraryapi/api/v1/genres", router);
 
 }

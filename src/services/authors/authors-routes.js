@@ -7,6 +7,9 @@ module.exports = app => {
         // #swagger.tags = ['Authors']
         // #swagger.description = 'Get all authors from the database'
         // #swagger.summary = 'Get authors'
+        /* #swagger.security = [{
+                "bearerAuth": []
+        }] */
         firebaseService.getauthors()
             .then((authors) => {
                 res.status(200).json(authors);
@@ -80,6 +83,6 @@ module.exports = app => {
     });
 
     // -- To declare the prefix path of your API service
-    app.use("/libraryapi/api/v1/services", router);
+    app.use("/libraryapi/api/v1/authors", router);
 
 }

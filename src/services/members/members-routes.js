@@ -13,6 +13,9 @@ module.exports = app => {
         // #swagger.tags = ['Members']
         // #swagger.summary = 'Get all members'
         // #swagger.description = 'This endpoint retrieves all the members in the database'
+        /* #swagger.security = [{
+                "bearerAuth": []
+        }] */
         firebaseService.getMembers()
             .then((members) => {
                 res.status(200).json(members);
@@ -26,6 +29,9 @@ module.exports = app => {
         // #swagger.tags = ['Members']
         // #swagger.summary = 'Get a member by ID'
         // #swagger.description = 'This endpoint retrieves a member based on the provided ID'
+        /* #swagger.security = [{
+                "bearerAuth": []
+        }] */
         const memberId = req.params.id;
         firebaseService.getMember(memberId)
             .then((member) => {
@@ -102,6 +108,6 @@ module.exports = app => {
     });
 
     // -- To declare the prefix path of your API service
-    app.use("/libraryapi/api/v1", router);
+    app.use("/libraryapi/api/v1/members", router);
 
 }

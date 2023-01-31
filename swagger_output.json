@@ -45,7 +45,7 @@
     "application/json"
   ],
   "paths": {
-    "/libraryapi/api/v1/members": {
+    "/libraryapi/api/v1/members/members": {
       "get": {
         "tags": [
           "Members"
@@ -60,10 +60,15 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
-    "/libraryapi/api/v1/members/{id}": {
+    "/libraryapi/api/v1/members/members/{id}": {
       "get": {
         "tags": [
           "Members"
@@ -85,10 +90,15 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
-    "/libraryapi/api/v1/addmember": {
+    "/libraryapi/api/v1/members/addmember": {
       "post": {
         "tags": [
           "Members"
@@ -133,7 +143,7 @@
         ]
       }
     },
-    "/libraryapi/api/v1/updatemember/{memberId}": {
+    "/libraryapi/api/v1/members/updatemember/{memberId}": {
       "put": {
         "tags": [
           "Members"
@@ -163,7 +173,7 @@
         ]
       }
     },
-    "/libraryapi/api/v1/deletemember/{memberId}": {
+    "/libraryapi/api/v1/members/deletemember/{memberId}": {
       "delete": {
         "tags": [
           "Members"
@@ -302,7 +312,7 @@
         ]
       }
     },
-    "/libraryapi/api/v1/services/getbooks": {
+    "/libraryapi/api/v1/books/getbooks": {
       "get": {
         "tags": [
           "Books"
@@ -317,10 +327,15 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
-    "/libraryapi/api/v1/services/addbook": {
+    "/libraryapi/api/v1/books/addbook": {
       "post": {
         "tags": [
           "Books"
@@ -359,7 +374,7 @@
         ]
       }
     },
-    "/libraryapi/api/v1/services/updatebook/{bookId}": {
+    "/libraryapi/api/v1/books/updatebook/{bookId}": {
       "put": {
         "tags": [
           "Books"
@@ -389,7 +404,7 @@
         ]
       }
     },
-    "/libraryapi/api/v1/services/deletebook/{bookId}": {
+    "/libraryapi/api/v1/books/deletebook/{bookId}": {
       "delete": {
         "tags": [
           "Books"
@@ -419,7 +434,7 @@
         ]
       }
     },
-    "/libraryapi/api/v1/services/getauthors": {
+    "/libraryapi/api/v1/authors/getauthors": {
       "get": {
         "tags": [
           "Authors"
@@ -434,10 +449,15 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
-    "/libraryapi/api/v1/services/addauthor": {
+    "/libraryapi/api/v1/authors/addauthor": {
       "post": {
         "tags": [
           "Authors"
@@ -473,7 +493,7 @@
         ]
       }
     },
-    "/libraryapi/api/v1/services/updateauthor/{authorId}": {
+    "/libraryapi/api/v1/authors/updateauthor/{authorId}": {
       "put": {
         "tags": [
           "Authors"
@@ -503,7 +523,7 @@
         ]
       }
     },
-    "/libraryapi/api/v1/services/deleteauthor/{authorId}": {
+    "/libraryapi/api/v1/authors/deleteauthor/{authorId}": {
       "delete": {
         "tags": [
           "Authors"
@@ -533,7 +553,7 @@
         ]
       }
     },
-    "/libraryapi/api/v1/services/getgenres": {
+    "/libraryapi/api/v1/genres/getgenres": {
       "get": {
         "tags": [
           "Genres"
@@ -551,7 +571,7 @@
         }
       }
     },
-    "/libraryapi/api/v1/services/addgenre": {
+    "/libraryapi/api/v1/genres/addgenre": {
       "post": {
         "tags": [
           "Genres"
@@ -590,7 +610,7 @@
         ]
       }
     },
-    "/libraryapi/api/v1/services/updategenre/{genreId}": {
+    "/libraryapi/api/v1/genres/updategenre/{genreId}": {
       "put": {
         "tags": [
           "Genres"
@@ -620,7 +640,7 @@
         ]
       }
     },
-    "/libraryapi/api/v1/services/deletegenre/{genreId}": {
+    "/libraryapi/api/v1/genres/deletegenre/{genreId}": {
       "delete": {
         "tags": [
           "Genres"
@@ -650,7 +670,7 @@
         ]
       }
     },
-    "/libraryapi/api/v1/services/getloans": {
+    "/libraryapi/api/v1/loans/getloans": {
       "get": {
         "tags": [
           "Loans"
@@ -665,10 +685,15 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
-    "/libraryapi/api/v1/services/addloan": {
+    "/libraryapi/api/v1/loans/addloan": {
       "post": {
         "tags": [
           "Loans"
@@ -713,7 +738,7 @@
         ]
       }
     },
-    "/libraryapi/api/v1/services/updateloan/{loanId}": {
+    "/libraryapi/api/v1/loans/updateloan/{loanId}": {
       "put": {
         "tags": [
           "Loans"
@@ -743,7 +768,7 @@
         ]
       }
     },
-    "/libraryapi/api/v1/services/deleteloan/{loanId}": {
+    "/libraryapi/api/v1/loans/deleteloan/{loanId}": {
       "delete": {
         "tags": [
           "Loans"
@@ -773,7 +798,7 @@
         ]
       }
     },
-    "/libraryapi/api/v1/services/getreservations": {
+    "/libraryapi/api/v1/reservations/getreservations": {
       "get": {
         "tags": [
           "Reservations"
@@ -788,10 +813,15 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
-    "/libraryapi/api/v1/services/addreservation": {
+    "/libraryapi/api/v1/reservations/addreservation": {
       "post": {
         "tags": [
           "Reservations"
@@ -833,7 +863,7 @@
         ]
       }
     },
-    "/libraryapi/api/v1/services/updatereservation/{reservationId}": {
+    "/libraryapi/api/v1/reservations/updatereservation/{reservationId}": {
       "put": {
         "tags": [
           "Reservations"
@@ -863,7 +893,7 @@
         ]
       }
     },
-    "/libraryapi/api/v1/services/deletereservation/{reservationId}": {
+    "/libraryapi/api/v1/reservations/deletereservation/{reservationId}": {
       "delete": {
         "tags": [
           "Reservations"

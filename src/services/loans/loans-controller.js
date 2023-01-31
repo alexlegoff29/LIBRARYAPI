@@ -1,5 +1,5 @@
 const firestore = require('../../config/firebase-config');
-const booksController = require('./books-controller');
+const booksController = require('../books/books-controller');
 
 exports.getLoans = async () => {
     let books = await booksController.getbooks();

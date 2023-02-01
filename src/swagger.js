@@ -19,10 +19,10 @@ const doc = {
     },
     servers: [
         { 
-            url: "http://app-53674ee6-697b-4694-b3de-82b032a4f01f.cleverapps.io/" 
+            url: "http://localhost:8080/" 
         }
     ],
-    host: "app-53674ee6-697b-4694-b3de-82b032a4f01f.cleverapps.io",
+    host: "localhost:8080",
     basePath: "/",
     consumes: ['application/json'],
     produces: ['application/json'],

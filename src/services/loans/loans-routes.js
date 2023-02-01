@@ -2,8 +2,9 @@ module.exports = app => {
     const express = require('express');
     const router = express.Router();
     const firebaseService = require('./loans-controller');
+    const jwtMiddleware = require("../../auth/jwt-middleware");
 
-    router.get("/getloans", (req, res) => {
+    router.get("/getloans", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Loans']
         // #swagger.summary = "Get all loan information"
         // #swagger.description = "Retrieve all loan information from the database"
@@ -19,7 +20,7 @@ module.exports = app => {
             });
     });
 
-    router.post("/addloan", (req, res) => {
+    router.post("/addloan", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Loans']
         // #swagger.summary = "Add a new loan"
         // #swagger.description = "Add a new loan to the database"
@@ -41,7 +42,7 @@ module.exports = app => {
             });
     });
 
-    router.put("/updateloan/:loanId", (req, res) => {
+    router.put("/updateloan/:loanId", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Loans']
         // #swagger.summary = "Update a loan"
         // #swagger.description = "Update an existing loan in the database"
@@ -64,7 +65,7 @@ module.exports = app => {
             });
     });
 
-    router.delete("/deleteloan/:loanId", (req, res) => {
+    router.delete("/deleteloan/:loanId", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Loans']
         // #swagger.summary = "Delete a loan"
         // #swagger.description = "Delete an existing loan from the database"

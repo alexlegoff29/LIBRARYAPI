@@ -2,8 +2,9 @@ module.exports = app => {
     const express = require('express');
     const router = express.Router();
     const firebaseService = require('./authors-controller');
+    const jwtMiddleware = require("../../auth/jwt-middleware");
 
-    router.get("/getauthors", (req, res) => {
+    router.get("/getauthors", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Authors']
         // #swagger.description = 'Get all authors from the database'
         // #swagger.summary = 'Get authors'
@@ -19,7 +20,7 @@ module.exports = app => {
             });
     });
 
-    router.post("/addauthor", (req, res) => {
+    router.post("/addauthor", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Authors']
         // #swagger.description = 'Add an author to the database'
         // #swagger.summary = 'Add author'
@@ -40,7 +41,7 @@ module.exports = app => {
             });
     });
 
-    router.put("/updateauthor/:authorId", (req, res) => {
+    router.put("/updateauthor/:authorId", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Authors']
         // #swagger.description = 'Update an author in the database'
         // #swagger.summary = 'Update author'
@@ -63,7 +64,7 @@ module.exports = app => {
             });
     });
 
-    router.delete("/deleteauthor/:authorId", (req, res) => {
+    router.delete("/deleteauthor/:authorId", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Authors']
         // #swagger.description = 'Delete an author from the database'
         // #swagger.summary = 'Delete author'

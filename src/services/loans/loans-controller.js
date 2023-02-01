@@ -1,21 +1,35 @@
 const firestore = require('../../config/firebase-config');
 const booksController = require('../books/books-controller');
 
+
 exports.getLoans = async () => {
-    let books = await booksController.getbooks();
     let loansSnapshot = await firestore.collection("loans").get();
-    let loans = loansSnapshot.docs.map(loan => {
-        let loanData = loan.data();
-        let book = books.find(book => book.Id === loanData['Book id']);
-        return {
-            BookName: book ? book.Name : 'Unknown',
-            DueDate: loan.data()['Due date'],
-            LoanDate: loan.data()['Loan date'],
-            MemberName: loan.data()['Member name']
+    let loans = loansSnapshot.docs.map(async loan => {
+      let loanData = loan.data();
+      let bookId = loanData['Book id'];
+      let bookSnapshot = await firestore.collection("books").doc(bookId).get();
+      let bookData = bookSnapshot.data();
+      let memberId = loanData['Member id'];
+      let memberSnapshot = await firestore.collection("members").doc(memberId).get();
+      let memberData = memberSnapshot.data();
+      
+      return {
+        Book: {
+            Title: bookData.Title,
+            Author: bookData.Author
+        },
+        DueDate: loanData['Due date'],
+        LoanDate: loanData['Loan date'],
+        Member: {
+          Name: memberData.Name,
+          Email: memberData['email'],
+          PhoneNumber: memberData['phoneNumber']
         }
+      }
     });
-    return loans;
+    return Promise.all(loans);
 }
+
 
 exports.addLoan = async (loan) => {
     try {

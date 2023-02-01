@@ -3,12 +3,12 @@ module.exports = app => {
     const router = require('express').Router();
     const jwtMiddleware = require('./jwt-middleware');
 
-    router.post("/register", auth.register);
+    router.post("/libraryapi/api/v1/register", auth.register);
 
-    router.post("/sign-in", auth.signIn);
+    router.post("/libraryapi/api/v1/sign-in", auth.signIn);
 
-    router.get("/me", jwtMiddleware.checkJwtTokenMiddleware, auth.getCurrentUser)
+    router.get("/libraryapi/api/v1/me", jwtMiddleware.checkJwtTokenMiddleware, auth.getCurrentUser)
 
     // -- To declare the prefix path of your API service
-    app.use("/libraryapi/api/v1", router);
+    app.use("/", router);
 }

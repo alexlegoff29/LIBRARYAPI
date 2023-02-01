@@ -11,6 +11,42 @@ exports.getReservations = async () => {
     });
     return reservations;
 }
+exports.getReservations = async () => {
+    let reservationsSnapshot = await firestore.collection("reservations").get();
+    let reservations = reservationsSnapshot.docs.map(async reservation => {
+      let reservationData = reservation.data();
+      
+      let bookId = reservationData['Book id'];
+      let bookSnapshot = await firestore.collection("books").doc(bookId).get();
+      let bookData = bookSnapshot.data();
+      
+      let memberId = reservationData['Member id'];
+      let memberSnapshot = await firestore.collection("members").doc(memberId).get();
+      let memberData = memberSnapshot.data();
+
+      let authorId = bookData['Author id'];
+      let authorSnapshot = await firestore.collection("authors").doc(authorId).get();
+      let authorData = authorSnapshot.data();
+      
+      return {
+        Book: {
+            Title: bookData.Title,
+            Author: {
+                Name: authorData.Name,
+                Birth: authorData['Date of birth'],
+                Death: authorData['Date of death']
+            }
+        },
+        Date: reservationData['Reservation date'],
+        Member: {
+          Name: memberData.Name,
+          Email: memberData['email'],
+          PhoneNumber: memberData['phoneNumber']
+        }
+      }
+    });
+    return Promise.all(reservations);
+}
 
 exports.addReservation = async (reservation) => {
     try {

@@ -2,8 +2,9 @@ module.exports = app => {
     const express = require('express');
     const router = express.Router();
     const firebaseService = require('./books-controller');
+    const jwtMiddleware = require("../../auth/jwt-middleware");
 
-    router.get("/getbooks", (req, res) => {
+    router.get("/getbooks", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Books']
         // #swagger.summary = "Get all books in the library"
         // #swagger.description = "This API endpoint retrieves all books in the library and returns a list of books in JSON format."
@@ -19,7 +20,24 @@ module.exports = app => {
             });
     });
 
-    router.post("/addbook", (req, res) => {
+    router.get("/getbook/:bookId", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
+        // #swagger.tags = ['Books']
+        // #swagger.summary = "Get a specific book in the library by its ID"
+        // #swagger.description = "This API endpoint retrieves a specific book in the library by its ID and returns the book information in JSON format."
+        /* #swagger.security = [{
+                "bearerAuth": []
+        }] */
+        let bookId = req.params.bookId;
+        firebaseService.getBookid(bookId)
+            .then((book) => {
+                res.status(200).json(book);
+            })
+            .catch((error) => {
+                res.status(500).json(error);
+            });
+    });
+
+    router.post("/addbook", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Books']
         // #swagger.summary = "Add a new book to the library"
         // #swagger.description = "This API endpoint creates a new book in the library by sending a JSON payload in the request body."
@@ -40,7 +58,7 @@ module.exports = app => {
     });
 
 
-    router.put("/updatebook/:bookId", (req, res) => {
+    router.put("/updatebook/:bookId", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Books']
         // #swagger.summary = "Update an existing book in the library"
         // #swagger.description = "This API endpoint updates an existing book in the library by sending a JSON payload in the request body."
@@ -64,7 +82,7 @@ module.exports = app => {
     });
 
 
-    router.delete("/deletebook/:bookId", (req, res) => {
+    router.delete("/deletebook/:bookId", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Books']
         // #swagger.summary = "Delete a book from the library"
         // #swagger.description = "This API endpoint deletes a book from the library."

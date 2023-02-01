@@ -2,8 +2,9 @@ module.exports = app => {
     const express = require('express');
     const router = express.Router();
     const firebaseService = require('./reservations-contoller');
+    const jwtMiddleware = require("../../auth/jwt-middleware");
     
-    router.get("/getreservations", (req, res) => {
+    router.get("/getreservations", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Reservations']
         // #swagger.description = 'Get all the reservations from the database'
         // #swagger.summary = 'Get all reservations'
@@ -19,7 +20,7 @@ module.exports = app => {
             });
     });
 
-    router.post("/addreservation", (req, res) => {
+    router.post("/addreservation", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Reservations']
         // #swagger.description = 'Add a reservation to the database'
         // #swagger.summary = 'Add reservation'
@@ -40,7 +41,7 @@ module.exports = app => {
             });
     });
 
-    router.put("/updatereservation/:reservationId", (req, res) => {
+    router.put("/updatereservation/:reservationId", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Reservations']
         // #swagger.description = 'Update a reservation in the database'
         // #swagger.summary = 'Update reservation'
@@ -63,7 +64,7 @@ module.exports = app => {
             });
     });
 
-    router.delete("/deletereservation/:reservationId", (req, res) => {
+    router.delete("/deletereservation/:reservationId", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Reservations']
         // #swagger.description = 'Delete a reservation from the database'
         // #swagger.summary = 'Delete reservation'

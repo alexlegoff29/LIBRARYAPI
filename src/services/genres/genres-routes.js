@@ -2,11 +2,15 @@ module.exports = app => {
     const express = require('express');
     const router = express.Router();
     const firebaseService = require('./genres-controller');
+    const jwtMiddleware = require("../../auth/jwt-middleware");
 
-    router.get("/getgenres", (req, res) => {
+    router.get("/getgenres", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Genres']
         // #swagger.summary = 'Get all genres'
         // #swagger.description = 'This endpoint is used to retrieve all genres from the database.'
+        /* #swagger.security = [{
+                "bearerAuth": []
+        }] */
         firebaseService.getGenres()
             .then((genres) => {
                 res.status(200).json(genres);
@@ -16,7 +20,7 @@ module.exports = app => {
             });
     });
 
-    router.post("/addgenre", (req, res) => {
+    router.post("/addgenre", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Genres']
         // #swagger.summary = 'Add a new genre'
         // #swagger.description = 'This endpoint is used to add a new genre to the database.'
@@ -36,7 +40,7 @@ module.exports = app => {
             });
     });
 
-    router.put("/updategenre/:genreId", (req, res) => {
+    router.put("/updategenre/:genreId", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Genres']
         // #swagger.summary = 'Update a genre'
         // #swagger.description = 'This endpoint is used to update an existing genre in the database.'
@@ -59,7 +63,7 @@ module.exports = app => {
             });
     });
 
-    router.delete("/deletegenre/:genreId", (req, res) => {
+    router.delete("/deletegenre/:genreId", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Genres']
         // #swagger.summary = 'Delete a genre'
         // #swagger.description = 'This endpoint is used to delete a genre from the database.'

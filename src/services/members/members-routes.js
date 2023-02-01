@@ -2,6 +2,7 @@ module.exports = app => {
     const express = require('express');
     const router = express.Router();
     const firebaseService = require('./members-controller');
+    const jwtMiddleware = require("../../auth/jwt-middleware");
     require("../../auth/auth-routes")(app);
     require("../../services/books/books-routes")(app);
     require("../../services/authors/authors-routes")(app);
@@ -9,7 +10,7 @@ module.exports = app => {
     require("../../services/loans/loans-routes")(app);
     require("../../services/reservations/reservations-routes")(app);
 
-    router.get("/members", (req, res) => {
+    router.get("/getmembers", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Members']
         // #swagger.summary = 'Get all members'
         // #swagger.description = 'This endpoint retrieves all the members in the database'
@@ -25,7 +26,7 @@ module.exports = app => {
             });
     });
 
-    router.get("/members/:id", (req, res) => {
+    router.get("/members/:id", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Members']
         // #swagger.summary = 'Get a member by ID'
         // #swagger.description = 'This endpoint retrieves a member based on the provided ID'
@@ -43,7 +44,7 @@ module.exports = app => {
     });
 
 
-    router.post("/addmember", (req, res) => {
+    router.post("/addmember", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Members']
         // #swagger.summary = 'Add a new member'
         // #swagger.description = 'This endpoint adds a new member to the database'
@@ -65,7 +66,7 @@ module.exports = app => {
             });
     });
 
-    router.put("/updatemember/:memberId", (req, res) => {
+    router.put("/updatemember/:memberId", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Members']
         // #swagger.summary = 'Update a member'
         // #swagger.description = 'This endpoint updates a member in the database based on the provided ID'
@@ -88,7 +89,7 @@ module.exports = app => {
             });
     });
 
-    router.delete("/deletemember/:memberId", (req, res) => {
+    router.delete("/deletemember/:memberId", jwtMiddleware.checkJwtTokenMiddleware, (req, res) => {
         // #swagger.tags = ['Members']
         // #swagger.summary = 'Deletes a member by ID'
         // #swagger.description = 'Deletes a member from the database by providing the member ID'

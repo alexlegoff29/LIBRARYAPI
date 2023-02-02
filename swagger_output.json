@@ -13,10 +13,10 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "app-53674ee6-697b-4694-b3de-82b032a4f01f.cleverapps.io",
+  "host": "localhost:8080",
   "servers": [
     {
-      "url": "http://app-53674ee6-697b-4694-b3de-82b032a4f01f.cleverapps.io/"
+      "url": "http://localhost:8080/"
     }
   ],
   "basePath": "/",
@@ -137,13 +137,13 @@
                 "Name": {
                   "example": "any"
                 },
+                "address": {
+                  "example": "any"
+                },
                 "email": {
                   "example": "any"
                 },
                 "phoneNumber": {
-                  "example": "any"
-                },
-                "address": {
                   "example": "any"
                 }
               }
@@ -398,29 +398,16 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/libraryapi/api/v1/books/addbook": {
@@ -443,9 +430,6 @@
               "type": "object",
               "properties": {
                 "Title": {
-                  "example": "any"
-                },
-                "Author": {
                   "example": "any"
                 }
               }
@@ -897,27 +881,6 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "BookName": {
-                  "example": "any"
-                },
-                "DueDate": {
-                  "example": "any"
-                },
-                "LoanDate": {
-                  "example": "any"
-                },
-                "MemberName": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
@@ -1058,24 +1021,6 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "BookTitle": {
-                  "example": "any"
-                },
-                "MemberName": {
-                  "example": "any"
-                },
-                "ReservationDate": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
@@ -1253,6 +1198,10 @@
           "type": "string",
           "example": "john.smith@yopmail.com"
         },
+        "password": {
+          "type": "string",
+          "example": "123"
+        },
         "phoneNumber": {
           "type": "string",
           "example": "+33695343070"
@@ -1273,17 +1222,24 @@
     "Books": {
       "type": "object",
       "properties": {
-        "Author": {
-          "type": "string",
-          "example": "J.K. Rowling"
-        },
         "Title": {
           "type": "string",
           "example": "Harry Potter  and the Sorcerer's Stone"
+        },
+        "Author id": {
+          "type": "string",
+          "example": "123"
+        },
+        "Genres id": {
+          "type": "string",
+          "example": "123"
+        },
+        "Reservation id": {
+          "type": "string",
+          "example": "123"
         }
       },
       "required": [
-        "Author",
         "Title"
       ]
     },
@@ -1310,26 +1266,26 @@
     "Genres": {
       "type": "object",
       "properties": {
-        "Description": {
-          "type": "string",
-          "example": "Literary genre that focuses on fantasy stories, often with elements of magic and the fantastic."
-        },
         "Name": {
           "type": "string",
           "example": "Fantasy"
+        },
+        "Description": {
+          "type": "string",
+          "example": "Literary genre that focuses on fantasy stories, often with elements of magic and the fantastic."
         }
       },
       "required": [
-        "Description",
-        "Name"
+        "Name",
+        "Description"
       ]
     },
     "Loans": {
       "type": "object",
       "properties": {
-        "Book name": {
+        "Book id": {
           "type": "string",
-          "example": "Harry Potter and the Sorcerer's Stone"
+          "example": "123"
         },
         "Due date": {
           "type": "string",
@@ -1339,22 +1295,22 @@
           "type": "string",
           "example": "01/01/2022"
         },
-        "Member name": {
+        "Member id": {
           "type": "string",
-          "example": "John Smith"
+          "example": "123"
         }
       }
     },
     "Reservations": {
       "type": "object",
       "properties": {
-        "Book title": {
+        "Book id": {
           "type": "string",
-          "example": "Harry Potter and the Sorcerer's Stone"
+          "example": "123"
         },
-        "Member name": {
+        "Member id": {
           "type": "string",
-          "example": "John Smith"
+          "example": "123"
         },
         "Reservation date": {
           "type": "string",

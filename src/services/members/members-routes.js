@@ -53,9 +53,9 @@ module.exports = app => {
         }] */
         let member = {
             Name: req.body.Name,
+            address: req.body.address,
             email: req.body.email,
-            phoneNumber: req.body.phoneNumber,
-            address: req.body.address
+            phoneNumber: req.body.phoneNumber
         }
         firebaseService.addMember(member)
             .then((result) => {

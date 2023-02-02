@@ -65,12 +65,15 @@ const doc = {
             $Name: "John Smith",
             $address: "5 rue de la garenne, 29200 Brest",
             $email: "john.smith@yopmail.com",
+            password: "123",
             $phoneNumber: "+33695343070",
             $uid: "4S6l8Pn9juB0aaxvKuxZ"
         },
         Books: {
-            $Author: "J.K. Rowling",
-            $Title: "Harry Potter  and the Sorcerer's Stone"
+            $Title: "Harry Potter  and the Sorcerer's Stone",
+            "Author id": "123",
+            "Genres id": "123",
+            "Reservation id": "123"
         },
         Authors: {
             "Date of birth": "31/07/1965",
@@ -78,18 +81,18 @@ const doc = {
             $Name: "J.K. Rowling"
         },
         Genres: {
-            $Description: "Literary genre that focuses on fantasy stories, often with elements of magic and the fantastic.",
-            $Name: "Fantasy"
+            $Name: "Fantasy",
+            $Description: "Literary genre that focuses on fantasy stories, often with elements of magic and the fantastic."
         },
         Loans: {
-            "Book name": "Harry Potter and the Sorcerer's Stone",
+            "Book id": "123",
             "Due date": '14/01/2022',
             "Loan date": "01/01/2022",
-            "Member name": "John Smith"
+            "Member id": "123"
         },
         Reservations: {
-            "Book title": "Harry Potter and the Sorcerer's Stone",
-            "Member name": "John Smith",
+            "Book id": "123",
+            "Member id": "123",
             "Reservation date": "01/01/2022"
         }
     }

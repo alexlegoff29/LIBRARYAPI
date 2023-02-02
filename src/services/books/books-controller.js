@@ -3,25 +3,68 @@ const firestore = require('../../config/firebase-config');
 exports.getbooks = async () => {
     let booksSnapshot = await firestore.collection("books").get();
     let books = booksSnapshot.docs.map(async book => {
-      let bookData = book.data();
-      
-      let authorId = bookData['Author id'];
-      let authorSnapshot = await firestore.collection("authors").doc(authorId).get();
-      let authorData = authorSnapshot.data();
-      
-      let genreId = bookData['Genres id'];
-      let genreSnapshot = await firestore.collection("genres").doc(genreId).get();
-      let genreData = genreSnapshot.data();
+        let bookData = book.data();
 
-      let reservationId = bookData['Reservation id'];
-      let reservationSnapshot = await firestore.collection("reservations").doc(reservationId).get();
-      let reservationData = reservationSnapshot.data();
+        let authorId = bookData['Author id'];
+        let authorSnapshot = await firestore.collection("authors").doc(authorId).get();
+        let authorData = authorSnapshot.data();
 
-      let memberId = reservationData['Member id'];
-      let memberSnapshot = await firestore.collection("members").doc(memberId).get();
-      let memberData = memberSnapshot.data();
-      
-      return {
+        let genreId = bookData['Genres id'];
+        let genreSnapshot = await firestore.collection("genres").doc(genreId).get();
+        let genreData = genreSnapshot.data();
+
+        let reservationId = bookData['Reservation id'];
+        let reservationSnapshot = await firestore.collection("reservations").doc(reservationId).get();
+        let reservationData = reservationSnapshot.data();
+
+        let memberId = reservationData['Member id'];
+        let memberSnapshot = await firestore.collection("members").doc(memberId).get();
+        let memberData = memberSnapshot.data();
+
+        return {
+            Title: bookData.Title,
+            Author: {
+                Name: authorData.Name,
+                Birth: authorData['Date of birth'],
+                Death: authorData['Date of death'],
+            },
+            Genre: {
+                Name: genreData.Name,
+                Description: genreData.Description
+            },
+            Reservation: {
+                Date: reservationData['Reservation date'],
+                Member: {
+                    Name: memberData.Name,
+                    Email: memberData['email'],
+                    PhoneNomber: memberData['phoneNumber']
+                }
+            }
+        }
+    });
+    return Promise.all(books);
+}
+
+exports.getBookid = async (bookId) => {
+    let bookSnapshot = await firestore.collection("books").doc(bookId).get();
+    let bookData = bookSnapshot.data();
+    let authorId = bookData['Author id'];
+    let authorSnapshot = await firestore.collection("authors").doc(authorId).get();
+    let authorData = authorSnapshot.data();
+
+    let genreId = bookData['Genres id'];
+    let genreSnapshot = await firestore.collection("genres").doc(genreId).get();
+    let genreData = genreSnapshot.data();
+
+    let reservationId = bookData['Reservation id'];
+    let reservationSnapshot = await firestore.collection("reservations").doc(reservationId).get();
+    let reservationData = reservationSnapshot.data();
+
+    let memberId = reservationData['Member id'];
+    let memberSnapshot = await firestore.collection("members").doc(memberId).get();
+    let memberData = memberSnapshot.data();
+
+    return {
         Title: bookData.Title,
         Author: {
             Name: authorData.Name,
@@ -29,8 +72,8 @@ exports.getbooks = async () => {
             Death: authorData['Date of death'],
         },
         Genre: {
-          Name: genreData.Name,
-          Description: genreData.Description
+            Name: genreData.Name,
+            Description: genreData.Description
         },
         Reservation: {
             Date: reservationData['Reservation date'],
@@ -40,16 +83,8 @@ exports.getbooks = async () => {
                 PhoneNomber: memberData['phoneNumber']
             }
         }
-      }
-    });
-    return Promise.all(books);
+    }
 }
-
-exports.getBookid = async (bookId) => {
-    let bookSnapshot = await firestore.collection("books").doc(bookId).get();
-    let bookData = bookSnapshot.data();
-    return bookData;
-  }
 
 
 exports.addbook = async (book) => {

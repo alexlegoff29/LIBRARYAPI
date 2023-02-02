@@ -29,8 +29,8 @@ module.exports = app => {
         }] */
         let author = {
             Name: req.body.Name,
-            "Date of birth": req.body["Date of birth"],
-            "Date of death": req.body["Date of death"],
+            DateOFbirth: req.body["Date of birth"],
+            DateOFdeath: req.body["Date of death"],
         }
         firebaseService.addauthor(author)
             .then((result) => {

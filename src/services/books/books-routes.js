@@ -46,9 +46,9 @@ module.exports = app => {
         }] */
         let book = {
             Title: req.body.Title,
-            "Author id": req.body["Author id"],
-            "Genres id": req.body["Genres id"],
-            "Reservation id": req.body["Reservation id"],
+            AuthorId: req.body["Author id"],
+            GenreId: req.body["Genres id"],
+            ReservationId: req.body["Reservation id"],
         }
         firebaseService.addbook(book)
             .then((result) => {

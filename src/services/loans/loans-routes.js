@@ -28,10 +28,10 @@ module.exports = app => {
                 "bearerAuth": []
         }] */
         let loan = {
-            "Book id": req.body["Book id"],
-            "Due date": req.body["Due date"],
-            "Loan date": req.body["Loan date"],
-            "Member id": req.body["Member id"]
+            BookId: req.body["Book id"],
+            DueDate: req.body["Due date"],
+            LoanDate: req.body["Loan date"],
+            MemberId: req.body["Member id"]
         }
         firebaseService.addLoan(loan)
             .then((result) => {

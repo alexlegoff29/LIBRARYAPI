@@ -28,9 +28,9 @@ module.exports = app => {
                 "bearerAuth": []
         }] */
         let reservation = {
-            "Book id": req.body["Book id"],
-            "Member id": req.body["Member id"],
-            "Reservation date": req.body["Reservation date"]
+            BookId: req.body["Book id"],
+            MemberId: req.body["Member id"],
+            ReservationDate: req.body["Reservation date"]
         }
         firebaseService.addReservation(reservation)
             .then((result) => {

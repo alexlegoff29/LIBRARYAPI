@@ -26,7 +26,7 @@ module.exports = app => {
         // #swagger.description = "This API endpoint retrieves a specific book in the library by its ID and returns the book information in JSON format."
         /* #swagger.security = [{
                 "bearerAuth": []
-        }] */
+        }]*/
         let bookId = req.params.bookId;
         firebaseService.getBookid(bookId)
             .then((book) => {
